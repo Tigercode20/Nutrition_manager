@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>أدوات PDF والنظام الغذائي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <!-- قسم النظام الغذائي -->
+  <section class="diet-section">
+    <h2>📋 النظام الغذائي</h2>
+    <textarea id="inputText" rows="15" placeholder="اكتب أو الصق النظام الغذائي..."></textarea>
+
+    <!-- أزرار التحكم العلوية -->
+    <div class="top-buttons">
+      <button onclick="pasteFromClipboard()">📋 لصق</button>
+      <button onclick="clearAll()">🗑️ مسح الكل</button>
+    </div>
+
+    <!-- أزرار الإجراءات (في صف واحد) -->
+    <div class="action-buttons">
+      <button onclick="updateDiet()">تحديث</button>
+      <button onclick="downloadPDF()">تحميل PDF</button>
+      <button onclick="downloadImage()">تحميل صورة</button>
+    </div>
+
+    <div class="page" id="page">
+      <h2>النظام الغذائي الخاص بك</h2>
+      <div id="mealsList"></div>
+      <div class="stats">
+        <div class="stat"><span class="label">السعرات</span><span class="value" id="calories">0</span></div>
+        <div class="stat"><span class="label">البروتين</span><span class="value" id="protein">0</span></div>
+        <div class="stat"><span class="label">الكارب</span><span class="value" id="carbs">0</span></div>
+        <div class="stat"><span class="label">الدهون</span><span class="value" id="fats">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم دمج PDF -->
+  <section class="pdf-section">
+    <h2>📄 دمج ملفات PDF</h2>
+    <label>اختر ملف PDF الأساسي:</label>
+    <input type="file" id="mainPDF" accept="application/pdf">
+    <label>اختر ملف الإدراج (PDF أو صورة):</label>
+    <input type="file" id="insertPDF" accept="application/pdf,image/*">
+    <label>رقم الصفحة:</label>
+    <input type="number" id="pageNumber" min="1" value="6">
+    <label>نوع الإدراج:</label>
+    <select id="insertMode">
+      <option value="replace" selected>استبدال الصفحة</option>
+      <option value="after">إدراج بعد الصفحة</option>
+    </select>
+    <button onclick="mergePDFs()">دمج الملفات</button>
+    <a id="downloadLink" style="display:none;"></a>
+    <button onclick="triggerDownload()" id="downloadBtn" style="display:none;">تحميل الملف المدمج</button>
+    <div id="msg"></div>
+  </section>
+
+  <!-- قسم إعدادات الألوان -->
+  <section class="color-section">
+    <h2>🎨 إعدادات الألوان</h2>
+    <label>لون الخلفية الأساسي:</label>
+    <input type="color" id="colorBg" value="#000814">
+    <label>لون الحدود والإضاءة:</label>
+    <input type="color" id="colorAccent" value="#00ffff">
+    <label>لون النصوص:</label>
+    <input type="color" id="colorText" value="#ffffff">
+    <label>لون خلفية الحقول:</label>
+    <input type="color" id="colorInputBg" value="#001e50">
+    <button onclick="applyColors()">تطبيق الألوان</button>
+    <button onclick="resetColors()">إعادة تعيين</button>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
