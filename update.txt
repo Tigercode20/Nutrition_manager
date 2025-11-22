@@ -6,4 +6,9 @@ git push
 git add .
 git commit -m "updated code"
 git push
+=======
+git add script.js update.txt
+git commit -m "resolve merge conflict"
+git push
 >>>>>>> cb6dc8dbacbaedd703dd964e7d5ef610ba9bd292
+
